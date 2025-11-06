@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Shop</string>
 
-    <string name="reg_label">Create account</string>
-    <string name="reg_login_hint">Input login</string>
-    <string name="reg_email_hint">Input email</string>
-    <string name="reg_phone_hint">Input phone number</string>
-    <string name="reg_password_hint">Input password</string>
-    <string name="reg_button_label">Create</string>
+    <string name="registration_label">Create account</string>
+    <string name="authorization_label">Login in account</string>
+    <string name="login_field_hint">Input login</string>
+    <string name="email_field_hint">Input email</string>
+    <string name="phone_field_hint">Input phone number</string>
+    <string name="password_field_hint">Input password</string>
+    <string name="registration_button">Create</string>
+    <string name="authorization_button">Login</string>
+    <string name="delete_button">Delete user</string>
+    <string name="authorization_link">Go to authorization</string>
+    <string name="registration_link">Go to registration</string>
 
 </resources>

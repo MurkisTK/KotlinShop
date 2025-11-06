@@ -1,8 +1,10 @@
 package com.example.shop
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -18,7 +20,12 @@ class MainActivity : AppCompatActivity() {
         val userEmail: EditText = findViewById(R.id.user_email)
         val userPassword: EditText = findViewById(R.id.user_password)
         val button: Button = findViewById(R.id.registration_button)
+        val authLink = findViewById<TextView>(R.id.authorization_link)
 
+        authLink.setOnClickListener {
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
+        }
         button.setOnClickListener {
             val login = userLogin.text.toString().trim()
             val phone = userPhone.text.toString().trim()

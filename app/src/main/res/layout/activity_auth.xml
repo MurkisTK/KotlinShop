@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".AuthActivity"
     android:background="#201E28">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginTop="110dp"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="@string/registration_label" />
+        android:text="@string/authorization_label" />
 
     <EditText
         android:id="@+id/user_login"
@@ -29,31 +29,8 @@
         android:textColor="#fdfdfd"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:hint="@string/login_field_hint" />
+        android:hint="@string/password_field_hint" />
 
-    <EditText
-        android:id="@+id/user_email"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#6a6a6a"
-        android:textColor="#fdfdfd"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:hint="@string/email_field_hint" />
-
-    <EditText
-        android:id="@+id/user_phone_number"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="phone"
-        android:textColorHint="#6a6a6a"
-        android:textColor="#fdfdfd"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:hint="@string/phone_field_hint" />
 
     <EditText
         android:id="@+id/user_password"
@@ -68,7 +45,7 @@
         android:hint="@string/password_field_hint" />
 
     <Button
-        android:id="@+id/registration_button"
+        android:id="@+id/authorization_button"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -76,11 +53,23 @@
         android:textSize="16sp"
         android:textColor="#5e4602"
         android:backgroundTint="#e2a600"
-        android:text="@string/registration_button"
+        android:text="@string/authorization_button"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp"
+        android:textColor="#5e4602"
+        android:backgroundTint="#e2a600"
+        android:text="@string/delete_button"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/authorization_link"
+        android:id="@+id/registration_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_thin"
@@ -88,6 +77,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="110dp"
         android:textSize="17sp"
-        android:text="@string/authorization_link" />
+        android:text="@string/registration_link" />
 
 </LinearLayout>

@@ -34,4 +34,27 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
         db.close()
     }
+
+    fun isUserExist(login: String, password: String): Boolean {
+        val db = this.readableDatabase
+
+        val query = db.rawQuery(
+            "SELECT * FROM users WHERE password = '$password' AND login = '$login'",
+            null
+        )
+        val result = query.moveToFirst()
+
+        query.close()
+        db.close()
+
+        return result
+    }
+
+    fun deleteUser(login: String) {
+        val db = this.writableDatabase
+
+        db.execSQL("DELETE FROM users WHERE login = '$login'")
+
+        db.close()
+    }
 }
