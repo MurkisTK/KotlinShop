@@ -33,8 +33,11 @@ class AuthActivity : AppCompatActivity() {
                 Toast.makeText(this, "Not all fields contains values", Toast.LENGTH_LONG).show()
             else {
                 val userExist = dbHelper.isUserExist(login, password)
-                if (userExist)
+                if (userExist){
                     Toast.makeText(this, "Successfully", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, ItemsActivity::class.java)
+                    startActivity(intent)
+                }
                 else
                     Toast.makeText(this, "Authorization error", Toast.LENGTH_LONG).show()
             }

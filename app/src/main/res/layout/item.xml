@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="#26242E">
+
+    <ImageView
+        android:id="@+id/image"
+        android:contentDescription="@string/image_desc"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/i1"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:textColor="#fdfdfd"
+        android:textSize="30sp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/description"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:textSize="17sp"
+        android:textColor="#fdfdfd"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/price"
+        android:paddingVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:textColor="#fdfdfd"
+        android:textSize="17sp"
+        android:gravity="end"
+        android:text="" />
+
+    <Button
+        android:id="@+id/swap_button"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        android:textColor="#5e4602"
+        android:backgroundTint="#e2a600"
+        android:text="@string/item_button"
+        android:textStyle="bold"/>
+</LinearLayout>
