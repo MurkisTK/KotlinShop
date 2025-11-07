@@ -4,6 +4,7 @@
     <string name="registration_label">Create account</string>
     <string name="authorization_label">Login in account</string>
     <string name="products_label">Products</string>
+    <string name="users_label">Users</string>
 
     <string name="login_field_hint">Input login</string>
     <string name="email_field_hint">Input email</string>
@@ -19,4 +20,6 @@
     <string name="item_button">Check</string>
     <string name="image_desc">Image description</string>
     <string name="price">Price: %1$s$</string>
+    <string name="users_link">Go to users</string>
+    <string name="products_link">Go to products</string>
 </resources>

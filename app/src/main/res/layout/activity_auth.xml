@@ -29,7 +29,7 @@
         android:textColor="#fdfdfd"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:hint="@string/password_field_hint" />
+        android:hint="@string/login_field_hint" />
 
 
     <EditText

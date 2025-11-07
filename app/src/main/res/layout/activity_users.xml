@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ItemsActivity"
+    tools:context=".UsersActivity"
     android:background="#201E28">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_marginTop="40dp"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:text="@string/users_label" />
+        android:text="@string/products_label" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items_list"
@@ -27,16 +27,15 @@
         android:layout_height="500dp" />
 
     <TextView
-        android:id="@+id/users_link"
+        android:id="@+id/products_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/inter_bold"
-        android:text="@string/users_link"
+        android:text="@string/products_link"
         android:textColor="#fdfdfd"
         android:textSize="25sp"
         android:textStyle="bold" />
-
 
 </LinearLayout>
