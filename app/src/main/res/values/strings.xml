@@ -22,4 +22,5 @@
     <string name="price">Price: %1$s$</string>
     <string name="users_link">Go to users</string>
     <string name="products_link">Go to products</string>
+    <string name="buy_button">Buy</string>
 </resources>

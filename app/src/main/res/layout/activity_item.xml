@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="#26242E">
+    android:layout_height="match_parent"
+    tools:context=".ItemActivity"
+    android:orientation="vertical"
+    android:background="#201E28">
 
     <ImageView
         android:id="@+id/image"
         android:contentDescription="@string/image_desc"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         app:srcCompat="@drawable/i1"
         android:scaleType="centerCrop"/>
 
     <TextView
+        android:layout_marginTop="60dp"
         android:id="@+id/title"
         android:paddingVertical="10dp"
         android:layout_width="match_parent"
@@ -48,7 +50,8 @@
         android:text="" />
 
     <Button
-        android:id="@+id/item_button"
+        android:layout_marginTop="60dp"
+        android:id="@+id/buy_button"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:layout_width="200dp"
@@ -57,6 +60,7 @@
         android:textSize="16sp"
         android:textColor="#5e4602"
         android:backgroundTint="#e2a600"
-        android:text="@string/item_button"
+        android:text="@string/buy_button"
         android:textStyle="bold"/>
+
 </LinearLayout>
