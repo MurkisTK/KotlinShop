@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AuthActivity"
+    tools:context=".activities.AuthActivity"
     android:background="#201E28">
 
     <TextView
@@ -20,6 +20,7 @@
         android:text="@string/authorization_label" />
 
     <EditText
+        android:autofillHints="name"
         android:id="@+id/user_login"
         android:layout_width="220dp"
         android:layout_height="50dp"
@@ -33,6 +34,7 @@
 
 
     <EditText
+        android:autofillHints="password"
         android:id="@+id/user_password"
         android:layout_width="220dp"
         android:layout_height="50dp"

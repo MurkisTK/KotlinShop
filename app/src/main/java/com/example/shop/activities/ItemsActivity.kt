@@ -1,4 +1,4 @@
-package com.example.shop
+package com.example.shop.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shop.models.Item
+import com.example.shop.adapters.ItemAdapter
+import com.example.shop.R
 
 class ItemsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

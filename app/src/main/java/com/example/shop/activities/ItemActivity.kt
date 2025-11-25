@@ -1,4 +1,4 @@
-package com.example.shop
+package com.example.shop.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.shop.R
+import kotlin.collections.get
 
 class ItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

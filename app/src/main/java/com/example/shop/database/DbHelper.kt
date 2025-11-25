@@ -1,9 +1,10 @@
-package com.example.shop
+package com.example.shop.database
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.shop.models.User
 
 class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, "app", factory, 1) {

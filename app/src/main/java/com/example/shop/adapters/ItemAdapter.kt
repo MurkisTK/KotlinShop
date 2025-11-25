@@ -1,4 +1,4 @@
-package com.example.shop
+package com.example.shop.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shop.models.Item
+import com.example.shop.R
+import com.example.shop.activities.ItemActivity
 
 class ItemAdapter(val items: List<Item>, val context: Context) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(

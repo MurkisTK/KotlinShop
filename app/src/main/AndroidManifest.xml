@@ -15,19 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab2">
         <activity
-            android:name=".ItemActivity"
+            android:name=".activities.ItemActivity"
             android:exported="false" />
         <activity
-            android:name=".UsersActivity"
+            android:name=".activities.UsersActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemsActivity"
+            android:name=".activities.ItemsActivity"
             android:exported="false" />
         <activity
-            android:name=".AuthActivity"
+            android:name=".activities.AuthActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

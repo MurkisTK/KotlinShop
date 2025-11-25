@@ -1,10 +1,12 @@
-package com.example.shop
+package com.example.shop.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shop.models.User
+import com.example.shop.R
 
 class UsersAdapter(val items: List<User>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     override fun onCreateViewHolder(

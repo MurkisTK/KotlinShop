@@ -1,4 +1,4 @@
-package com.example.shop
+package com.example.shop.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shop.models.User
+import com.example.shop.R
+import com.example.shop.adapters.UsersAdapter
 
 class UsersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,8 +19,8 @@ class UsersActivity : AppCompatActivity() {
         val usersList: RecyclerView = findViewById(R.id.items_list)
         val users: ArrayList<User> = arrayListOf()
 
-        users.add(User("Alex", "alex@mail.com", "3","12345"))
-        users.add(User("Bob", "bob@mail.com", "2","qwerty"))
+        users.add(User("Alex", "alex@mail.com", "3", "12345"))
+        users.add(User("Bob", "bob@mail.com", "2", "qwerty"))
         users.add(User("John", "john@mail.com", "1", "johny"))
 
         usersList.layoutManager = LinearLayoutManager(this)

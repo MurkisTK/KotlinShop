@@ -1,4 +1,4 @@
-package com.example.shop
+package com.example.shop.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.shop.R
+import com.example.shop.models.User
+import com.example.shop.database.DbHelper
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

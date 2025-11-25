@@ -1,4 +1,4 @@
-package com.example.shop
+package com.example.shop.models
 
 class Item(
     val id: Int,
@@ -7,5 +7,4 @@ class Item(
     val desc: String,
     val text: String,
     val price: Int
-) {
-}
+)
