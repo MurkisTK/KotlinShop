@@ -76,37 +76,32 @@ class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
         val items = mutableListOf<Item>()
         val db = readableDatabase
 
-        try {
-            val cursor = db.query(
-                TABLE_NAME, null, null, null, null, null, null
-            )
+        val cursor = db.query(
+            TABLE_NAME, null, null, null, null, null, null
+        )
 
-            cursor.use { c ->
-                val idIndex = c.getColumnIndex(COLUMN_ID)
-                val textIndex = c.getColumnIndex(COLUMN_TEXT)
-                val titleIndex = c.getColumnIndex(COLUMN_TITLE)
-                val descIndex = c.getColumnIndex(COLUMN_DESCRIPTION)
-                val priceIndex = c.getColumnIndex(COLUMN_PRICE)
-                val imageIndex = c.getColumnIndex(COLUMN_IMAGE)
+        cursor.use { c ->
+            val idIndex = c.getColumnIndex(COLUMN_ID)
+            val textIndex = c.getColumnIndex(COLUMN_TEXT)
+            val titleIndex = c.getColumnIndex(COLUMN_TITLE)
+            val descIndex = c.getColumnIndex(COLUMN_DESCRIPTION)
+            val priceIndex = c.getColumnIndex(COLUMN_PRICE)
+            val imageIndex = c.getColumnIndex(COLUMN_IMAGE)
 
-                while (c.moveToNext()) {
-                    val item = Item(
-                        c.getInt(idIndex),
-                        c.getString(imageIndex),
-                        c.getString(titleIndex),
-                        c.getString(descIndex),
-                        c.getString(textIndex),
-                        c.getInt(priceIndex),
-                    )
-                    items.add(item)
-                }
+            while (c.moveToNext()) {
+                val item = Item(
+                    c.getInt(idIndex),
+                    c.getString(imageIndex),
+                    c.getString(titleIndex),
+                    c.getString(descIndex),
+                    c.getString(textIndex),
+                    c.getInt(priceIndex),
+                )
+                items.add(item)
             }
-        } catch (e: Exception) {
-            false
         }
 
-
-        return items as ArrayList<Item>;
+        return items as ArrayList<Item>
     }
 
     fun addItem(item: Item) {

@@ -10,12 +10,11 @@ import com.example.shop.models.Item
 import com.example.shop.adapters.ItemAdapter
 import com.example.shop.R
 import com.example.shop.database.ProductsDbHelper
-import org.w3c.dom.Text
 
 class ItemsActivity : AppCompatActivity() {
-    private lateinit var usersLink: TextView;
-    private lateinit var itemsList: RecyclerView;
-    private lateinit var items: ArrayList<Item>;
+    private lateinit var usersLink: TextView
+    private lateinit var itemsList: RecyclerView
+    private lateinit var items: ArrayList<Item>
     private var dbHelper: ProductsDbHelper = ProductsDbHelper(this, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
