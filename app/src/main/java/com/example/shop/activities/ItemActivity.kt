@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.shop.ImageMapper
 import com.example.shop.R
 import kotlin.collections.get
 
@@ -24,12 +25,7 @@ class ItemActivity : AppCompatActivity() {
         price.text = getString(R.string.price, intent.getIntExtra("price", 0).toString())
         desc.text = intent.getStringExtra("desc")
 
-        val map = mapOf(
-            "i1" to R.drawable.i1,
-            "i2" to R.drawable.i2,
-            "i3" to R.drawable.i3,
-        )
-        image.setImageResource(map[intent.getStringExtra("image")]!!)
+        image.setImageResource(ImageMapper.images[intent.getStringExtra("image")]!!)
 
         buyButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)

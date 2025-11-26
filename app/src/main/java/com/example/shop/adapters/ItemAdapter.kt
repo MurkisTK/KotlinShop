@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shop.ImageMapper
 import com.example.shop.models.Item
 import com.example.shop.R
 import com.example.shop.activities.ItemActivity
@@ -29,12 +30,7 @@ class ItemAdapter(val items: List<Item>, val context: Context) :
         holder.price.text = context.getString(R.string.price, items[position].price.toString())
         holder.desc.text = items[position].desc
 
-        val map = mapOf(
-            "i1" to R.drawable.i1,
-            "i2" to R.drawable.i2,
-            "i3" to R.drawable.i3,
-        )
-        holder.image.setImageResource(map[items[position].image]!!)
+        holder.image.setImageResource(ImageMapper.images[items[position].image]!!)
 
         holder.itemButton.setOnClickListener {
             val intent = Intent(context, ItemActivity::class.java)
