@@ -10,16 +10,14 @@ import com.example.shop.R
 
 class UsersAdapter(val items: List<User>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): UserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.user, parent, false)
         return UserViewHolder(view)
     }
 
     override fun onBindViewHolder(
-        holder: UserViewHolder,
-        position: Int
+        holder: UserViewHolder, position: Int
     ) {
         holder.login.text = items[position].login
         holder.phone.text = items[position].phone

@@ -13,7 +13,8 @@ import com.example.shop.models.Item
 import com.example.shop.R
 import com.example.shop.activities.ItemActivity
 
-class ItemAdapter(val items: List<Item>, val context: Context) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter(val items: List<Item>, val context: Context) :
+    RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): ItemViewHolder {
