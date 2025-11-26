@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.shop.models.User
 
-class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
+class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, "app", factory, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val query =
@@ -20,6 +20,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         newVersion: Int
     ) {
         db!!.execSQL("DROP TABLE IF EXISTS users")
+
         onCreate(db)
     }
 

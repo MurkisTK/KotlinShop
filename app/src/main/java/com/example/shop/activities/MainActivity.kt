@@ -9,14 +9,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shop.R
 import com.example.shop.models.User
-import com.example.shop.database.DbHelper
+import com.example.shop.database.UserDbHelper
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val dbHelper = DbHelper(this, null)
+        val dbHelper = UserDbHelper(this, null)
 
         val userLogin: EditText = findViewById(R.id.user_login)
         val userPhone: EditText = findViewById(R.id.user_phone_number)

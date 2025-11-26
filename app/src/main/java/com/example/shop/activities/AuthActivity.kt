@@ -7,7 +7,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.shop.database.DbHelper
+import com.example.shop.database.UserDbHelper
 import com.example.shop.R
 
 class AuthActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var authorizationButton: Button
     private lateinit var deleteButton: Button
     private lateinit var regLink: TextView
-    private val dbHelper = DbHelper(this, null)
+    private val dbHelper = UserDbHelper(this, null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ class AuthActivity : AppCompatActivity() {
 
         regLink.setOnClickListener { handleSwapToRegistration() }
         authorizationButton.setOnClickListener {
-            defaultFieldsHandler({ login, password ->
+            defaultFieldsHandler({ _, _ ->
                 val intent = Intent(this, ItemsActivity::class.java)
                 startActivity(intent)
             }, "Successfully", "Authorization error")
