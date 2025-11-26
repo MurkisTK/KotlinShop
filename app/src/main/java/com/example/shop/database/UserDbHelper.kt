@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.shop.models.User
 
 class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, "app", factory, 1) {
+    SQLiteOpenHelper(context, "users", factory, 1) {
     companion object {
         const val TABLE_NAME = "users"
         const val COLUMN_ID = "id"
@@ -16,6 +16,7 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         const val COLUMN_PHONE = "phone"
         const val COLUMN_PASSWORD = "password"
     }
+
     override fun onCreate(db: SQLiteDatabase?) {
         val query = """
             CREATE TABLE $TABLE_NAME (
@@ -27,14 +28,10 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             )
         """.trimIndent()
         db!!.execSQL(query)
-
-        addUser(User("a", "a", "a", "a"))
     }
 
     override fun onUpgrade(
-        db: SQLiteDatabase?,
-        oldVersion: Int,
-        newVersion: Int
+        db: SQLiteDatabase?, oldVersion: Int, newVersion: Int
     ) {
         db!!.execSQL("DROP TABLE IF EXISTS users")
 
@@ -55,7 +52,7 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             val passwordIndex = c.getColumnIndex(COLUMN_PASSWORD)
             val phoneIndex = c.getColumnIndex(COLUMN_PHONE)
 
-            while (c.moveToFirst()) {
+            while (c.moveToNext()) {
                 val user = User(
                     c.getString(loginIndex),
                     c.getString(emailIndex),
@@ -66,7 +63,6 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             }
         }
 
-        db.close()
         return users as ArrayList<User>
     }
 
@@ -79,8 +75,6 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
         val db = this.writableDatabase
         db.insert(TABLE_NAME, null, content)
-
-        db.close()
     }
 
     fun isUserExist(login: String, password: String): Boolean {
@@ -100,7 +94,6 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val result = query.moveToFirst()
 
         query.close()
-        db.close()
 
         return result
     }
@@ -108,8 +101,6 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun deleteUser(login: String) {
         val db = this.writableDatabase
 
-        db.execSQL("DELETE FROM $TABLE_NAME WHERE $COLUMN_LOGIN = '$login'")
-
-        db.close()
+        db.delete(TABLE_NAME, "$COLUMN_LOGIN = ?", arrayOf(login))
     }
 }

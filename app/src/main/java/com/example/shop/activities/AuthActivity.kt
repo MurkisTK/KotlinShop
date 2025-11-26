@@ -44,9 +44,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun defaultFieldsHandler(
-        funcOnUserExist: (String, String) -> Unit,
-        successMessage: String,
-        failMessage: String
+        funcOnUserExist: (String, String) -> Unit, successMessage: String, failMessage: String
     ) {
         val login = userLogin.text.toString().trim()
         val password = userPassword.text.toString().trim()
@@ -56,10 +54,8 @@ class AuthActivity : AppCompatActivity() {
             if (userExist) {
                 funcOnUserExist(login, password)
                 Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show()
-            } else
-                Toast.makeText(this, failMessage, Toast.LENGTH_LONG).show()
-        } else
-            createEmptyFieldsToast()
+            } else Toast.makeText(this, failMessage, Toast.LENGTH_LONG).show()
+        } else createEmptyFieldsToast()
 
         clearFields()
     }

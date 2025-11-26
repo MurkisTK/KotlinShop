@@ -30,7 +30,7 @@ class ItemsActivity : AppCompatActivity() {
         }
     }
 
-    fun initialize(){
+    fun initialize() {
         usersLink = findViewById(R.id.users_link)
         itemsList = findViewById<RecyclerView>(R.id.items_list)
         items = dbHelper.getAllItems()

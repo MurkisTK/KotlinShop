@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class SelectedProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, "app", factory, 1) {
+    SQLiteOpenHelper(context, "selectedProducts", factory, 1) {
 
     override fun onCreate(db: SQLiteDatabase?) {
         val query = "CREATE TABLE selected_products (id INT PRIMARY KEY, product_id INT, count INT)"
@@ -23,7 +23,7 @@ class SelectedProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorF
         onCreate(db)
     }
 
-    fun addSelectedProduct(id: Int){
+    fun addSelectedProduct(id: Int) {
         if (isSelectedProductExist(id))
             return
 
@@ -32,11 +32,9 @@ class SelectedProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorF
         content.put("count", 1)
         val db = this.writableDatabase
         db.insert("selected_products", null, content)
-
-        db.close()
     }
 
-    fun isSelectedProductExist(id: Int): Boolean{
+    fun isSelectedProductExist(id: Int): Boolean {
         val db = this.readableDatabase
 
         val query = db.rawQuery(
@@ -46,7 +44,6 @@ class SelectedProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorF
         val result = query.moveToFirst()
 
         query.close()
-        db.close()
 
         return result
     }
