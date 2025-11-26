@@ -91,7 +91,7 @@ class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
             val priceIndex = c.getColumnIndex(COLUMN_PRICE)
             val imageIndex = c.getColumnIndex(COLUMN_IMAGE)
 
-            while (c.moveToFirst()) {
+            while (c.moveToNext()) {
                 val item = Item(
                     c.getInt(idIndex),
                     c.getString(imageIndex),
