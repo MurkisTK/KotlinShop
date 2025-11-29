@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shop.database.UserDbHelper
 import com.example.shop.R
+import com.example.shop.database.CommonDbHelper
 
 class AuthActivity : AppCompatActivity() {
     private lateinit var userLogin: EditText
@@ -16,7 +17,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var authorizationButton: Button
     private lateinit var deleteButton: Button
     private lateinit var regLink: TextView
-    private val dbHelper = UserDbHelper(this, null)
+    private val dbHelper = CommonDbHelper.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class AuthActivity : AppCompatActivity() {
         }
         deleteButton.setOnClickListener {
             defaultFieldsHandler({ login, _ ->
-                dbHelper.deleteUser(login)
+                dbHelper.userDbHelper.deleteUser(login)
             }, "Successfully deleted", "Deletion error")
         }
     }
@@ -50,7 +51,7 @@ class AuthActivity : AppCompatActivity() {
         val password = userPassword.text.toString().trim()
 
         if (checkFieldsNotEmpty(login, password)) {
-            val userExist = dbHelper.isUserExist(login, password)
+            val userExist = dbHelper.userDbHelper.isUserExist(login, password)
             if (userExist) {
                 funcOnUserExist(login, password)
                 Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show()

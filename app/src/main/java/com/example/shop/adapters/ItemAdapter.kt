@@ -39,6 +39,7 @@ class ItemAdapter(val items: List<Item>, val context: Context) :
             intent.putExtra("desc", items[position].text)
             intent.putExtra("image", items[position].image)
             intent.putExtra("price", items[position].price)
+            intent.putExtra("product_id", items[position].id)
 
             context.startActivity(intent)
         }

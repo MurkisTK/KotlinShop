@@ -1,50 +1,110 @@
 package com.example.shop.database
 
 import android.content.ContentValues
-import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
+import com.example.shop.database.UserDbHelper.Companion.COLUMN_LOGIN
+import com.example.shop.models.SelectedProduct
 
-class SelectedProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, "selectedProducts", factory, 1) {
+class SelectedProductsDbHelper(val dbHelper: CommonDbHelper) {
+    companion object {
+        const val TABLE_NAME = "selected_products"
+        const val COLUMN_ID = "id"
+        const val COLUMN_PRODUCT_ID = "product_id"
+        const val COLUMN_COUNT = "count"
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        val query = "CREATE TABLE selected_products (id INT PRIMARY KEY, product_id INT, count INT)"
-        db!!.execSQL(query)
+        fun onCreate(db: SQLiteDatabase?) {
+            val query = """
+                CREATE TABLE $TABLE_NAME (
+                    $COLUMN_ID INT PRIMARY KEY, 
+                    $COLUMN_PRODUCT_ID INT, 
+                    $COLUMN_COUNT INT,
+                    FOREIGN KEY ($COLUMN_PRODUCT_ID) REFERENCES ${ProductsDbHelper.TABLE_NAME}(${ProductsDbHelper.COLUMN_ID})
+                )
+            """.trimIndent()
+            db!!.execSQL(query)
+        }
+
+        fun onUpgrade(
+            db: SQLiteDatabase?,
+        ) {
+            db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+
+            onCreate(db)
+        }
     }
 
-    override fun onUpgrade(
-        db: SQLiteDatabase?,
-        oldVersion: Int,
-        newVersion: Int
-    ) {
-        db!!.execSQL("DROP TABLE IF EXISTS selected_products")
+    fun getAllSelectedProducts(): ArrayList<SelectedProduct>{
+        val selectedProducts = mutableListOf<SelectedProduct>()
+        val db = dbHelper.readableDatabase
 
-        onCreate(db)
+        val cursor = db.query(TABLE_NAME, null, null, null, null, null, null)
+
+        cursor.use { c ->
+            val productIdIndex = c.getColumnIndex(COLUMN_PRODUCT_ID)
+            val countIndex = c.getColumnIndex(COLUMN_COUNT)
+
+            while (c.moveToNext()) {
+                val selectedProduct = SelectedProduct(
+                    c.getInt(productIdIndex),
+                    c.getInt(countIndex),
+                )
+                selectedProducts.add(selectedProduct)
+            }
+        }
+
+        return selectedProducts as ArrayList<SelectedProduct>
     }
 
-    fun addSelectedProduct(id: Int) {
+    fun updateSelectedProducts(productId: Int, count: Int){
+        val db = dbHelper.writableDatabase
+
+        if (count < 1) {
+            db.delete(TABLE_NAME, "$COLUMN_PRODUCT_ID = ?", arrayOf(productId.toString()))
+        }
+        else {
+            val content = ContentValues().apply {
+                put(COLUMN_COUNT, count)
+            }
+
+            db.update(TABLE_NAME, content, "$COLUMN_PRODUCT_ID = ?", arrayOf(productId.toString()))
+        }
+    }
+
+    fun addNewSelectedProduct(id: Int) {
         if (isSelectedProductExist(id))
             return
 
         val content = ContentValues()
-        content.put("product_id", id)
-        content.put("count", 1)
-        val db = this.writableDatabase
-        db.insert("selected_products", null, content)
+        content.put(COLUMN_PRODUCT_ID, id)
+        content.put(COLUMN_COUNT, 1)
+        val db = dbHelper.writableDatabase
+        db.insert(TABLE_NAME, null, content)
     }
 
     fun isSelectedProductExist(id: Int): Boolean {
-        val db = this.readableDatabase
+        val db = dbHelper.readableDatabase
+        val selection = "$COLUMN_PRODUCT_ID = ?"
+        val selectionArgs = arrayOf(id.toString())
 
-        val query = db.rawQuery(
-            "SELECT * FROM selected_products WHERE product_id = $id",
-            null
+        val query = db.query(
+            TABLE_NAME,
+            null,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null,
         )
         val result = query.moveToFirst()
 
         query.close()
 
         return result
+    }
+
+    fun deleteProducts() {
+        val db = dbHelper.writableDatabase
+
+        db.delete(TABLE_NAME, null, null)
     }
 }

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shop.ImageMapper
 import com.example.shop.R
+import com.example.shop.database.CommonDbHelper
 import kotlin.collections.get
 
 class ItemActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class ItemActivity : AppCompatActivity() {
     private lateinit var price: TextView
     private lateinit var buyButton: Button
     private lateinit var image: ImageView
+    private  lateinit var dbHelper: CommonDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class ItemActivity : AppCompatActivity() {
         image.setImageResource(ImageMapper.images[intent.getStringExtra("image")]!!)
 
         buyButton.setOnClickListener {
+            addProduct()
             val intent = Intent(this, ItemsActivity::class.java)
             startActivity(intent)
         }
@@ -42,5 +45,12 @@ class ItemActivity : AppCompatActivity() {
         price = findViewById(R.id.price)
         buyButton = findViewById(R.id.buy_button)
         image = findViewById(R.id.image)
+        dbHelper = CommonDbHelper.getInstance(this)
+    }
+
+    fun addProduct(){
+        val productId = intent.getIntExtra("product_id", 0)
+
+        dbHelper.selectedProductsDbHelper.addNewSelectedProduct(productId)
     }
 }

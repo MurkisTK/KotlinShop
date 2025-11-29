@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.shop.models.User
 import com.example.shop.R
 import com.example.shop.adapters.UsersAdapter
+import com.example.shop.database.CommonDbHelper
 import com.example.shop.database.UserDbHelper
 
 class UsersActivity : AppCompatActivity() {
     private lateinit var productsLink: TextView
     private lateinit var usersList: RecyclerView
     private lateinit var users: ArrayList<User>
-    private lateinit var dbHelper: UserDbHelper
+    private lateinit var dbHelper: CommonDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +31,10 @@ class UsersActivity : AppCompatActivity() {
     }
 
     fun initialize() {
-        dbHelper = UserDbHelper(this, null)
+        dbHelper = CommonDbHelper.getInstance(this)
         productsLink = findViewById(R.id.products_link)
         usersList = findViewById(R.id.items_list)
-        users = dbHelper.getAllUsers()
+        users = dbHelper.userDbHelper.getAllUsers()
 
         usersList.layoutManager = LinearLayoutManager(this)
         usersList.adapter = UsersAdapter(users)

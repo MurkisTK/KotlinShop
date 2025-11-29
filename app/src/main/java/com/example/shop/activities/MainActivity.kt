@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shop.R
+import com.example.shop.database.CommonDbHelper
 import com.example.shop.database.ProductsDbHelper
 import com.example.shop.models.User
 import com.example.shop.database.UserDbHelper
@@ -20,8 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userPassword: EditText
     private lateinit var button: Button
     private lateinit var authLink: TextView
-
-    private lateinit var dbHelper: UserDbHelper
+    private lateinit var dbHelper: CommonDbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         ).show()
         else {
             val user = User(login, email, phone, password)
-            dbHelper.addUser(user)
+            dbHelper.userDbHelper.addUser(user)
             Toast.makeText(this, "User $login was created", Toast.LENGTH_LONG).show()
 
             clearFields()
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         if (!email.contains("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$".toRegex())) return false
 
-        if (!phone.contains("^\\+?[0-9\\s\\-\\(\\)]{10,}$".toRegex())) return false
+        if (!phone.contains("^\\+?[0-9\\s\\-()]{10,}$".toRegex())) return false
 
         return true
     }
@@ -78,7 +78,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initialize() {
-        initializeDb()
+        dbHelper = CommonDbHelper.getInstance(this)
+        dbHelper.initializeDb()
 
         userLogin = findViewById(R.id.user_login)
         userPhone = findViewById(R.id.user_phone_number)
@@ -86,16 +87,5 @@ class MainActivity : AppCompatActivity() {
         userPassword = findViewById(R.id.user_password)
         button = findViewById(R.id.registration_button)
         authLink = findViewById<TextView>(R.id.authorization_link)
-    }
-
-    fun initializeDb() {
-        dbHelper = UserDbHelper(this, null)
-        val productsDbHelper = ProductsDbHelper(this, null)
-
-        dbHelper.addUser(User("a", "a", "a", "a"))
-
-        productsDbHelper.addItem(Item(1, "i1", "t1", "d1", "text1", 100))
-        productsDbHelper.addItem(Item(2, "i2", "t2", "d2", "text2", 200))
-        productsDbHelper.addItem(Item(3, "i3", "t3", "d3", "text3", 300))
     }
 }

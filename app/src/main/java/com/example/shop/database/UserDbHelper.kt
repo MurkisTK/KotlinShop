@@ -1,13 +1,10 @@
 package com.example.shop.database
 
 import android.content.ContentValues
-import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import com.example.shop.models.User
 
-class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, "users", factory, 1) {
+class UserDbHelper(val dbHelper: CommonDbHelper) {
     companion object {
         const val TABLE_NAME = "users"
         const val COLUMN_ID = "id"
@@ -15,10 +12,9 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         const val COLUMN_EMAIL = "email"
         const val COLUMN_PHONE = "phone"
         const val COLUMN_PASSWORD = "password"
-    }
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        val query = """
+        fun onCreate(db: SQLiteDatabase?) {
+            val query = """
             CREATE TABLE $TABLE_NAME (
                 $COLUMN_ID INT PRIMARY KEY, 
                 $COLUMN_LOGIN TEXT,
@@ -27,20 +23,22 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 $COLUMN_PASSWORD TEXT
             )
         """.trimIndent()
-        db!!.execSQL(query)
+            db!!.execSQL(query)
+        }
+
+        fun onUpgrade(
+            db: SQLiteDatabase?
+        ) {
+            db!!.execSQL("DROP TABLE IF EXISTS users")
+
+            onCreate(db)
+        }
     }
 
-    override fun onUpgrade(
-        db: SQLiteDatabase?, oldVersion: Int, newVersion: Int
-    ) {
-        db!!.execSQL("DROP TABLE IF EXISTS users")
-
-        onCreate(db)
-    }
 
     fun getAllUsers(): ArrayList<User> {
         val users = mutableListOf<User>()
-        val db = readableDatabase
+        val db = dbHelper.readableDatabase
 
         val cursor = db.query(
             TABLE_NAME, null, null, null, null, null, null
@@ -73,12 +71,12 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         content.put(COLUMN_PHONE, user.phone)
         content.put(COLUMN_PASSWORD, user.password)
 
-        val db = this.writableDatabase
+        val db = dbHelper.writableDatabase
         db.insert(TABLE_NAME, null, content)
     }
 
     fun isUserExist(login: String, password: String): Boolean {
-        val db = this.readableDatabase
+        val db = dbHelper.readableDatabase
         val selection = "$COLUMN_LOGIN = ? AND $COLUMN_PASSWORD = ?"
         val selectionArgs = arrayOf(login, password)
 
@@ -99,8 +97,17 @@ class UserDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     }
 
     fun deleteUser(login: String) {
-        val db = this.writableDatabase
+        val db = dbHelper.writableDatabase
 
         db.delete(TABLE_NAME, "$COLUMN_LOGIN = ?", arrayOf(login))
+    }
+
+    fun isTableEmpty(): Boolean {
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_NAME", null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        return count == 0
     }
 }

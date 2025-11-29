@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Shop</string>
 
+    <string name="cart_label">Cart</string>
     <string name="registration_label">Create account</string>
     <string name="authorization_label">Login in account</string>
     <string name="products_label">Products</string>
@@ -14,13 +15,18 @@
     <string name="registration_button">Create</string>
     <string name="authorization_button">Login</string>
     <string name="delete_button">Delete user</string>
+    <string name="item_button">Check</string>
+    <string name="buy_button">Buy</string>
 
     <string name="authorization_link">Go to authorization</string>
     <string name="registration_link">Go to registration</string>
-    <string name="item_button">Check</string>
-    <string name="image_desc">Image description</string>
-    <string name="price">Price: %1$s$</string>
     <string name="users_link">Go to users</string>
     <string name="products_link">Go to products</string>
-    <string name="buy_button">Buy</string>
+
+    <string name="image_desc">Image description</string>
+    <string name="price">Price: %1$s$</string>
+    <string name="count">Count: %1$s</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="cart_link">Go to cart</string>
 </resources>

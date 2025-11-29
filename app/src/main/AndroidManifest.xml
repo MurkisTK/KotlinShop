@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lab2">
         <activity
+            android:name=".activities.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ItemActivity"
             android:exported="false" />
         <activity

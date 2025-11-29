@@ -1,13 +1,10 @@
 package com.example.shop.database
 
 import android.content.ContentValues
-import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import com.example.shop.models.Item
 
-class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, "products", factory, 1) {
+class ProductsDbHelper(val dbHelper: CommonDbHelper) {
     companion object {
         const val TABLE_NAME = "products"
         const val COLUMN_ID = "id"
@@ -16,10 +13,9 @@ class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
         const val COLUMN_DESCRIPTION = "description"
         const val COLUMN_TEXT = "text"
         const val COLUMN_TITLE = "title"
-    }
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        val query = """
+        fun onCreate(db: SQLiteDatabase?) {
+            val query = """
             CREATE TABLE $TABLE_NAME (
                 $COLUMN_ID INTEGER  PRIMARY KEY, 
                 $COLUMN_IMAGE TEXT,
@@ -30,19 +26,20 @@ class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
             )
         """.trimIndent()
 
-        db!!.execSQL(query)
-    }
+            db!!.execSQL(query)
+        }
 
-    override fun onUpgrade(
-        db: SQLiteDatabase?, oldVersion: Int, newVersion: Int
-    ) {
-        db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
+        fun onUpgrade(
+            db: SQLiteDatabase?
+        ) {
+            db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
 
-        onCreate(db)
+            onCreate(db)
+        }
     }
 
     fun getItemById(id: Int): Item? {
-        val db = readableDatabase
+        val db = dbHelper.readableDatabase
         val selection = "$COLUMN_ID = ?"
         val selectionArgs = arrayOf(id.toString())
 
@@ -74,7 +71,7 @@ class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
 
     fun getAllItems(): ArrayList<Item> {
         val items = mutableListOf<Item>()
-        val db = readableDatabase
+        val db = dbHelper.readableDatabase
 
         val cursor = db.query(
             TABLE_NAME, null, null, null, null, null, null
@@ -113,7 +110,16 @@ class ProductsDbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?)
         content.put(COLUMN_DESCRIPTION, item.desc)
         content.put(COLUMN_TEXT, item.text)
 
-        val db = this.writableDatabase
+        val db = dbHelper.writableDatabase
         db.insert(TABLE_NAME, null, content)
+    }
+
+    fun isTableEmpty(): Boolean {
+        val db = dbHelper.readableDatabase
+        val cursor = db.rawQuery("SELECT COUNT(*) FROM $TABLE_NAME", null)
+        cursor.moveToFirst()
+        val count = cursor.getInt(0)
+        cursor.close()
+        return count == 0
     }
 }
